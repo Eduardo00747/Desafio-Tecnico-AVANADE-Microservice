@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A3C62777-F4D6-491D-84FE-7301285FF385}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Estoque.API", "src\Estoque.API\Estoque.API.csproj", "{0755C7EF-E82E-4592-8B0D-1161A5FCC021}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "src\Shared\Shared.csproj", "{8658B20B-8806-4C68-81D9-8D17623F0A86}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0755C7EF-E82E-4592-8B0D-1161A5FCC021}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0755C7EF-E82E-4592-8B0D-1161A5FCC021}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0755C7EF-E82E-4592-8B0D-1161A5FCC021}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0755C7EF-E82E-4592-8B0D-1161A5FCC021}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8658B20B-8806-4C68-81D9-8D17623F0A86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8658B20B-8806-4C68-81D9-8D17623F0A86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8658B20B-8806-4C68-81D9-8D17623F0A86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8658B20B-8806-4C68-81D9-8D17623F0A86}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0755C7EF-E82E-4592-8B0D-1161A5FCC021} = {A3C62777-F4D6-491D-84FE-7301285FF385}
+		{8658B20B-8806-4C68-81D9-8D17623F0A86} = {A3C62777-F4D6-491D-84FE-7301285FF385}
+	EndGlobalSection
+EndGlobal
