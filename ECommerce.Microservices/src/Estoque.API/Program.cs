@@ -16,9 +16,11 @@ builder.Services.AddDbContext<EstoqueDbContext>(options =>
         builder.Configuration.GetConnectionString("DefaultConnection"),
         new MySqlServerVersion(new Version(9, 0, 0)) // coloque aqui a versão do seu MySQL
     ));
-    
+
 // Repositories
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
+builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 
 // Authentication - JWT
 var jwtSettings = configuration.GetSection("Jwt");
