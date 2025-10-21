@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Y27X0xT8RdQ=",
+  "dgSpecHash": "MijiYxB3tE0=",
   "success": true,
-  "projectFilePath": "C:\\Users\\ProGaming\\Desktop\\Programas\\Projetos\\Desafio Tecnico AVANADE\\ECommerce.Microservices\\src\\Estoque.API\\Estoque.API.csproj",
+  "projectFilePath": "C:\\Users\\ProGaming\\Documents\\GitHub\\Desafio-Tecnico-AVANADE-Microservice\\ECommerce.Microservices\\src\\Estoque.API\\Estoque.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ProGaming\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\ProGaming\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.0\\microsoft.aspnetcore.authentication.jwtbearer.8.0.0.nupkg.sha512",
