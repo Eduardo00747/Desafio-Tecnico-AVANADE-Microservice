@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Estoque.API.Data;
 using Estoque.API.Repositories;
+using Estoque.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,9 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 builder.Services.AddScoped<IAuthRepository, AuthRepository>();
 
+// RabbitMQ Consumer
+builder.Services.AddHostedService<RabbitMQConsumer>();
+
 // Authentication - JWT
 var jwtSettings = configuration.GetSection("Jwt");
 var key = Encoding.ASCII.GetBytes(jwtSettings["Key"]!);
@@ -37,9 +41,10 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateIssuerSigningKey = true,
-        ValidIssuer = jwtSettings["Issuer"],
-        ValidAudience = jwtSettings["Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(key)
+        ValidIssuer = "ECommerceAuth",
+        ValidAudience = "ECommerceClients",
+        IssuerSigningKey = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes("MinhaChaveSuperSecreta_DeveTerPeloMenos16Chars!")            )
     };
 });
 

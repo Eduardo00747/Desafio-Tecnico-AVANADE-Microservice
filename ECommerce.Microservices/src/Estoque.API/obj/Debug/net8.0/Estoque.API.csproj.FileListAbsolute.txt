@@ -229,3 +229,4 @@ C:\Users\ProGaming\Documents\GitHub\Desafio-Tecnico-AVANADE-Microservice\ECommer
 C:\Users\ProGaming\Documents\GitHub\Desafio-Tecnico-AVANADE-Microservice\ECommerce.Microservices\src\Estoque.API\obj\Debug\net8.0\Estoque.API.pdb
 C:\Users\ProGaming\Documents\GitHub\Desafio-Tecnico-AVANADE-Microservice\ECommerce.Microservices\src\Estoque.API\obj\Debug\net8.0\Estoque.API.genruntimeconfig.cache
 C:\Users\ProGaming\Documents\GitHub\Desafio-Tecnico-AVANADE-Microservice\ECommerce.Microservices\src\Estoque.API\obj\Debug\net8.0\ref\Estoque.API.dll
+C:\Users\ProGaming\Documents\GitHub\Desafio-Tecnico-AVANADE-Microservice\ECommerce.Microservices\src\Estoque.API\bin\Debug\net8.0\RabbitMQ.Client.dll

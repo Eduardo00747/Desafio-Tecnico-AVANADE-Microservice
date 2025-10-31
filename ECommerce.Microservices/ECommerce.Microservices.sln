@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Estoque.API", "src\Estoque.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "src\Shared\Shared.csproj", "{8658B20B-8806-4C68-81D9-8D17623F0A86}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vendas.API", "src\Vendas.API\Vendas.API.csproj", "{8132C157-D493-4CF6-A525-E62E6D752BBC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,9 +28,14 @@ Global
 		{8658B20B-8806-4C68-81D9-8D17623F0A86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8658B20B-8806-4C68-81D9-8D17623F0A86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8658B20B-8806-4C68-81D9-8D17623F0A86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8132C157-D493-4CF6-A525-E62E6D752BBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8132C157-D493-4CF6-A525-E62E6D752BBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8132C157-D493-4CF6-A525-E62E6D752BBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8132C157-D493-4CF6-A525-E62E6D752BBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0755C7EF-E82E-4592-8B0D-1161A5FCC021} = {A3C62777-F4D6-491D-84FE-7301285FF385}
 		{8658B20B-8806-4C68-81D9-8D17623F0A86} = {A3C62777-F4D6-491D-84FE-7301285FF385}
+		{8132C157-D493-4CF6-A525-E62E6D752BBC} = {A3C62777-F4D6-491D-84FE-7301285FF385}
 	EndGlobalSection
 EndGlobal

@@ -9,5 +9,8 @@ namespace Estoque.API.Repositories
         Task<Product> AddAsync(Product product);
         Task UpdateAsync(Product product);
         Task DeleteAsync(int id);
+
+        // 👇 Adicione este novo método
+        Task UpdateStockAsync(int productId, int quantity);
     }
 }

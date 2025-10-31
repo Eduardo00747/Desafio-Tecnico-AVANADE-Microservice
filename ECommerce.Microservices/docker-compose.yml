@@ -1,16 +1,45 @@
 services:
-  mysql:
+  # 🗄️ Banco de dados da API de Estoques
+  mysql-estoque:
     image: mysql:8.0
-    container_name: mysql
+    container_name: mysql-estoque
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: Dud@00747
       MYSQL_DATABASE: estoquedb
     ports:
       - "3307:3306"
+    volumes:
+      - estoque_data:/var/lib/mysql
+    networks:
+      - ecommerce-net
+
+  # 🗄️ Banco de dados da API de Vendas
+  mysql-vendas:
+    image: mysql:8.0
+    container_name: mysql-vendas
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Dud@00747
+      MYSQL_DATABASE: vendasdb
+    ports:
+      - "3308:3306"
+    volumes:
+      - vendas_data:/var/lib/mysql
+    networks:
+      - ecommerce-net
 
   rabbitmq:
     image: rabbitmq:3-management
+    container_name: rabbitmq
     ports:
       - "5672:5672"
       - "15672:15672"
+
+volumes:
+  estoque_data:
+  vendas_data:
+
+networks:
+  ecommerce-net:
+    driver: bridge

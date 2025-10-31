@@ -42,5 +42,21 @@ namespace Estoque.API.Repositories
             _context.Entry(product).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
+
+        // 👇 Aqui está o método usado pelo RabbitMQConsumer
+        public async Task UpdateStockAsync(int productId, int quantity)
+        {
+            var product = await _context.Products.FindAsync(productId);
+            if (product == null)
+                throw new Exception($"Produto com ID {productId} não encontrado.");
+
+            if (product.Quantity < quantity)
+                throw new Exception($"Estoque insuficiente para o produto {product.Name}.");
+
+            product.Quantity -= quantity;
+
+            _context.Products.Update(product);
+            await _context.SaveChangesAsync();
+        }
     }
 }

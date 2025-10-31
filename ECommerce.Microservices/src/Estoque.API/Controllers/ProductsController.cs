@@ -4,6 +4,7 @@ using Estoque.API.Models;
 using Estoque.API.Repositories;
 using Estoque.API.DTOs;
 using System.Globalization;
+using System.Text.Json;
 
 namespace Estoque.API.Controllers
 {
