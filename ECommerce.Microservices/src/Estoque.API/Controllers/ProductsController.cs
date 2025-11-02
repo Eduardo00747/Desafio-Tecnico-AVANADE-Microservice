@@ -41,17 +41,23 @@ namespace Estoque.API.Controllers
             if (string.IsNullOrWhiteSpace(dto.Price))
                 return BadRequest("❌ O campo preço é obrigatório.");
 
-            // Verifica se contém vírgula ou ponto
-            if (dto.Price.Contains(',') || dto.Price.Contains('.'))
-                return BadRequest("❌ Valor inválido. Não use ponto ou vírgula para cadastrar o preço do produto. Exemplo: 4000, 5500, 100.");
+            // Verifica se contém ponto (aceita apenas vírgula)
+            if (dto.Price.Contains('.'))
+                return BadRequest("❌ Valor inválido. Utilize vírgula para separar as casas decimais. Exemplo: 59,99 ou 100,00.");
 
-            // Verifica se é um número inteiro válido
-            if (!int.TryParse(dto.Price, out int priceValue))
-                return BadRequest("❌ Valor inválido. O preço deve conter apenas números inteiros. Exemplo: 500, 1500, 7000.");
+            // Tenta converter para decimal usando a cultura pt-BR (que usa vírgula como separador)
+            if (!decimal.TryParse(dto.Price, System.Globalization.NumberStyles.Currency, 
+                new System.Globalization.CultureInfo("pt-BR"), out decimal priceValue))
+                return BadRequest("❌ Valor inválido. O preço deve ser um número válido com vírgula. Exemplo: 59,99 ou 100,00.");
 
             // Verifica se o preço é negativo
             if (priceValue < 0)
                 return BadRequest("❌ Valor inválido. O preço não pode ser negativo.");
+
+            // Verifica se tem mais de duas casas decimais
+            var decimalPlaces = BitConverter.GetBytes(decimal.GetBits(priceValue)[3])[2];
+            if (decimalPlaces > 2)
+                return BadRequest("❌ Valor inválido. O preço deve ter no máximo duas casas decimais. Exemplo: 59,99 ou 100,00.");
 
             // 🔹 Validação da quantidade
             var quantityStr = dto.Quantity.ToString();
@@ -87,17 +93,23 @@ namespace Estoque.API.Controllers
             if (string.IsNullOrWhiteSpace(dto.Price))
                 return BadRequest("❌ O campo preço é obrigatório.");
 
-            // Verifica se contém vírgula ou ponto
-            if (dto.Price.Contains(',') || dto.Price.Contains('.'))
-                return BadRequest("❌ Valor inválido. Não use ponto ou vírgula para cadastrar o preço do produto. Exemplo: 4000, 5500, 100.");
+            // Verifica se contém ponto (aceita apenas vírgula)
+            if (dto.Price.Contains('.'))
+                return BadRequest("❌ Valor inválido. Utilize vírgula para separar as casas decimais. Exemplo: 59,99 ou 100,00.");
 
-            // Verifica se é um número inteiro válido
-            if (!int.TryParse(dto.Price, out int priceValue))
-                return BadRequest("❌ Valor inválido. O preço deve conter apenas números inteiros. Exemplo: 500, 1500, 7000.");
+            // Tenta converter para decimal usando a cultura pt-BR (que usa vírgula como separador)
+            if (!decimal.TryParse(dto.Price, System.Globalization.NumberStyles.Currency, 
+                new System.Globalization.CultureInfo("pt-BR"), out decimal priceValue))
+                return BadRequest("❌ Valor inválido. O preço deve ser um número válido com vírgula. Exemplo: 59,99 ou 100,00.");
 
             // Verifica se o preço é negativo
             if (priceValue < 0)
                 return BadRequest("❌ Valor inválido. O preço não pode ser negativo.");
+
+            // Verifica se tem mais de duas casas decimais
+            var decimalPlaces = BitConverter.GetBytes(decimal.GetBits(priceValue)[3])[2];
+            if (decimalPlaces > 2)
+                return BadRequest("❌ Valor inválido. O preço deve ter no máximo duas casas decimais. Exemplo: 59,99 ou 100,00.");
 
             // 🔹 Validação da quantidade
             var quantityStr = dto.Quantity.ToString();
