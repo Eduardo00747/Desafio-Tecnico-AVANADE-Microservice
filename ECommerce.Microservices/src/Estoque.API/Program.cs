@@ -21,8 +21,6 @@ builder.Services.AddDbContext<EstoqueDbContext>(options =>
 // Repositories
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
-builder.Services.AddScoped<IAuthRepository, AuthRepository>();
-
 // RabbitMQ Consumer
 builder.Services.AddHostedService<RabbitMQConsumer>();
 
@@ -99,8 +97,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();

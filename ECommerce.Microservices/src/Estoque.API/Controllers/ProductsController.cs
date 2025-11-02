@@ -119,6 +119,24 @@ namespace Estoque.API.Controllers
             return Ok("✅ Produto atualizado com sucesso!");
         }
 
+        [HttpPut("{id:int}/quantity")]
+        public async Task<IActionResult> UpdateQuantity(int id, [FromBody] UpdateQuantityDTO dto)
+        {
+            var existing = await _repo.GetByIdAsync(id);
+            if (existing == null)
+                return NotFound("❌ Produto não encontrado.");
+
+            // Validação da quantidade
+            if (dto.Quantity < 0)
+                return BadRequest("❌ Quantidade inválida. O valor não pode ser negativo.");
+
+            // Atualiza apenas a quantidade
+            existing.Quantity = dto.Quantity;
+
+            await _repo.UpdateAsync(existing);
+            return Ok("✅ Quantidade atualizada com sucesso!");
+        }
+
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {

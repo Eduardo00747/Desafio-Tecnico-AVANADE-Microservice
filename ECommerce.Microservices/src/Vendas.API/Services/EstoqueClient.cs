@@ -22,32 +22,55 @@ namespace Vendas.API.Services
         // ✅ Adicionamos o parâmetro 'token'
         public async Task<ProductResponse?> GetProductAsync(int productId, string? token = null)
         {
-            var request = new HttpRequestMessage(HttpMethod.Get, $"/api/products/{productId}");
-
-            // ✅ Agora o 'token' existe no escopo
-            if (!string.IsNullOrEmpty(token))
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-
-            var resp = await _http.SendAsync(request);
-
-            if (!resp.IsSuccessStatusCode)
+            try
             {
-                _logger.LogWarning("Erro ao consultar produto {ProductId} - Status {Status}", productId, resp.StatusCode);
+                var request = new HttpRequestMessage(HttpMethod.Get, $"/api/products/{productId}");
+
+                if (!string.IsNullOrEmpty(token))
+                    request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                var resp = await _http.SendAsync(request);
+
+                if (!resp.IsSuccessStatusCode)
+                {
+                    var errorContent = await resp.Content.ReadAsStringAsync();
+                    _logger.LogWarning("Erro ao consultar produto {ProductId} - Status {Status} - Erro: {Error}", 
+                        productId, resp.StatusCode, errorContent);
+                    return null;
+                }
+
+                return await resp.Content.ReadFromJsonAsync<ProductResponse>();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao consultar produto {ProductId}", productId);
                 return null;
             }
-
-            return await resp.Content.ReadFromJsonAsync<ProductResponse>();
         }
 
         public async Task<bool> UpdateProductQuantityAsync(int id, int newQuantity, string token)
         {
-            _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            try
+            {
+                _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-            var body = JsonSerializer.Serialize(new { quantity = newQuantity });
-            var content = new StringContent(body, Encoding.UTF8, "application/json");
-
-            var response = await _http.PutAsync($"api/products/{id}/quantity", content);
-            return response.IsSuccessStatusCode;
+                var updateDto = new { quantity = newQuantity };
+                var response = await _http.PutAsJsonAsync($"/api/products/{id}/quantity", updateDto);
+                
+                if (!response.IsSuccessStatusCode)
+                {
+                    var errorContent = await response.Content.ReadAsStringAsync();
+                    _logger.LogError("Erro ao atualizar quantidade do produto {ProductId}. Status: {Status}, Erro: {Error}", 
+                        id, response.StatusCode, errorContent);
+                }
+                
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Erro ao atualizar quantidade do produto {ProductId}", id);
+                return false;
+            }
         }
     }
 }

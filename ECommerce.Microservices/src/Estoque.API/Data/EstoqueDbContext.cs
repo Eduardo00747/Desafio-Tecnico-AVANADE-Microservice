@@ -8,8 +8,6 @@ namespace Estoque.API.Data
     {
         public EstoqueDbContext(DbContextOptions<EstoqueDbContext> options) : base(options) { }
 
-        public DbSet<User> Users { get; set; } 
-
         public DbSet<Product> Products { get; set; } = null!;
 
     }

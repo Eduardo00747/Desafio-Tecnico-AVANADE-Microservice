@@ -1,4 +1,19 @@
 services:
+  # 🗄️ Banco de dados do Gateway (Autenticação)
+  mysql-gateway:
+    image: mysql:8.0
+    container_name: mysql-gateway
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Dud@00747
+      MYSQL_DATABASE: gatewaydb
+    ports:
+      - "3309:3306"
+    volumes:
+      - gateway_data:/var/lib/mysql
+    networks:
+      - ecommerce-net
+
   # 🗄️ Banco de dados da API de Estoques
   mysql-estoque:
     image: mysql:8.0
@@ -37,6 +52,7 @@ services:
       - "15672:15672"
 
 volumes:
+  gateway_data:
   estoque_data:
   vendas_data:
 
