@@ -80,19 +80,23 @@ O serviço Admin é responsável pelas funcionalidades administrativas da plataf
 
 Crie uma conta com:
 
+```bash
 {
   "username": "entrevistador",
   "password": "123456",
   "role": 0
 }
+```
 
 Lembrando que "0" significa que esta criando uma conta admin ou :
 
+```bash
 {
   "username": "entrevistador",
   "password": "123456",
   "role": Admin
 }
+```
 
 As duas formas cria uma conta admin.
 
@@ -111,19 +115,23 @@ As duas formas cria uma conta admin.
 
 Crie uma conta com:
 
+```bash
 {
   "username": "entrevistador",
   "password": "123456",
   "role": 1
 }
+```
 
 Lembrando que "Costumer" significa que esta criando uma conta cliente ou :
 
+```bash
 {
   "username": "entrevistador",
   "password": "123456",
   "role": Costumer
 }
+```
 
 O serviço Cliente é responsável pelas funcionalidades voltadas ao usuário final.
 
