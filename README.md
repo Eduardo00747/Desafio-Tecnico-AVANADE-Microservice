@@ -78,6 +78,24 @@ O Gateway é o ponto de entrada principal para a aplicação, responsável por r
 
 O serviço Admin é responsável pelas funcionalidades administrativas da plataforma.
 
+Crie uma conta com:
+
+{
+  "username": "entrevistador",
+  "password": "123456",
+  "role": 0
+}
+
+Lembrando que "0" significa que esta criando uma conta admin ou :
+
+{
+  "username": "entrevistador",
+  "password": "123456",
+  "role": Admin
+}
+
+As duas formas cria uma conta admin.
+
 | Informação | Detalhes |
 | :--- | :--- |
 | **Porta de Acesso (Exposição)** | `http://localhost:5001` (Acesso direto, geralmente usado em desenvolvimento) |
@@ -90,6 +108,22 @@ O serviço Admin é responsável pelas funcionalidades administrativas da plataf
 3.  *Opcional (apenas para debug):* Acesse o Swagger do Admin em `http://localhost:5001/swagger/index.html`.
 
 ### 3. Cliente (ECommerce.Microservices.Cliente)
+
+Crie uma conta com:
+
+{
+  "username": "entrevistador",
+  "password": "123456",
+  "role": 1
+}
+
+Lembrando que "Costumer" significa que esta criando uma conta cliente ou :
+
+{
+  "username": "entrevistador",
+  "password": "123456",
+  "role": Costumer
+}
 
 O serviço Cliente é responsável pelas funcionalidades voltadas ao usuário final.
 
