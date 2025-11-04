@@ -54,8 +54,20 @@ namespace Vendas.API.Services
             {
                 _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
-                var updateDto = new { quantity = newQuantity };
-                var response = await _http.PutAsJsonAsync($"/api/products/{id}/quantity", updateDto);
+                // Quantidade a ser subtraída do estoque
+                var updateDto = new { quantityToSubtract = newQuantity };
+                
+                _logger.LogInformation("Enviando requisição para reduzir estoque - ProductId: {ProductId}, Quantidade: {Quantity}", 
+                    id, newQuantity);
+                    
+                var response = await _http.PatchAsync(
+                    $"/api/products/{id}/quantity/sell", 
+                    new StringContent(
+                        JsonSerializer.Serialize(updateDto), 
+                        Encoding.UTF8, 
+                        "application/json"
+                    )
+                );
                 
                 if (!response.IsSuccessStatusCode)
                 {

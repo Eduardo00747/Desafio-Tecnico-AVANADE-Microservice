@@ -55,7 +55,7 @@ namespace Gateway.API.Controllers
                 Subject = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Name, user.Username),
-                    new Claim(ClaimTypes.Role, "User")
+                    new Claim(ClaimTypes.Role, user.Role.ToString())
                 }),
                 Issuer = "ECommerceAuth",
                 Audience = "ECommerceClients",
@@ -71,7 +71,7 @@ namespace Gateway.API.Controllers
         
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] LoginModel model)
+        public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
             if (string.IsNullOrWhiteSpace(model.Username) || 
                 string.IsNullOrWhiteSpace(model.Password))
@@ -85,10 +85,17 @@ namespace Gateway.API.Controllers
                 return BadRequest("❌ Usuário já existe.");
             }
 
+            // Tenta converter a string do role para o enum
+            if (!Enum.TryParse<UserRole>(model.Role, true, out var userRole))
+            {
+                return BadRequest("Role inválido. Use 'Admin' ou 'Customer'.");
+            }
+
             var user = new User
             {
                 Username = model.Username,
-                Password = model.Password
+                Password = model.Password,
+                Role = userRole
             };
 
             await _authRepo.CreateUserAsync(user);

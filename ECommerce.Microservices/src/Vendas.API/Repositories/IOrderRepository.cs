@@ -9,5 +9,6 @@ namespace Vendas.API.Repositories
         Task<Order?> GetByIdAsync(int id);
         Task<IEnumerable<Order>> GetAllAsync();
         Task DeleteAllAsync();
+        Task DeleteByIdAsync(int id);
     }
 }

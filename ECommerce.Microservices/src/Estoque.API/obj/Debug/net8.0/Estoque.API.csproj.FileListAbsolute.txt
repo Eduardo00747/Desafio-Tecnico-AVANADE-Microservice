@@ -205,8 +205,6 @@ C:\Users\ProGaming\Documents\GitHub\Desafio-Tecnico-AVANADE-Microservice\ECommer
 C:\Users\ProGaming\Documents\GitHub\Desafio-Tecnico-AVANADE-Microservice\ECommerce.Microservices\src\Estoque.API\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\ProGaming\Documents\GitHub\Desafio-Tecnico-AVANADE-Microservice\ECommerce.Microservices\src\Estoque.API\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\ProGaming\Documents\GitHub\Desafio-Tecnico-AVANADE-Microservice\ECommerce.Microservices\src\Estoque.API\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-C:\Users\ProGaming\Documents\GitHub\Desafio-Tecnico-AVANADE-Microservice\ECommerce.Microservices\src\Estoque.API\bin\Debug\net8.0\Shared.dll
-C:\Users\ProGaming\Documents\GitHub\Desafio-Tecnico-AVANADE-Microservice\ECommerce.Microservices\src\Estoque.API\bin\Debug\net8.0\Shared.pdb
 C:\Users\ProGaming\Documents\GitHub\Desafio-Tecnico-AVANADE-Microservice\ECommerce.Microservices\src\Estoque.API\obj\Debug\net8.0\Estoque.API.csproj.AssemblyReference.cache
 C:\Users\ProGaming\Documents\GitHub\Desafio-Tecnico-AVANADE-Microservice\ECommerce.Microservices\src\Estoque.API\obj\Debug\net8.0\Estoque.API.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\ProGaming\Documents\GitHub\Desafio-Tecnico-AVANADE-Microservice\ECommerce.Microservices\src\Estoque.API\obj\Debug\net8.0\Estoque.API.AssemblyInfoInputs.cache

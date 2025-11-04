@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Estoque.API.Models;
 using Estoque.API.Repositories;
 using Estoque.API.DTOs;
+using Estoque.API.Authorization;
 using System.Globalization;
 using System.Text.Json;
 
@@ -10,7 +11,7 @@ namespace Estoque.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize] // protege todos endpoints de produto
+    [Authorize] // Base authorization para todos os endpoints
     public class ProductsController : ControllerBase
     {
         private readonly IProductRepository _repo;
@@ -37,6 +38,10 @@ namespace Estoque.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] ProductDTO dto)
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return BadRequest(new { message = "❌ Acesso inválido para cliente, somente para Administradores" });
+            }
             // Verifica se o preço é nulo ou vazio
             if (string.IsNullOrWhiteSpace(dto.Price))
                 return BadRequest("❌ O campo preço é obrigatório.");
@@ -84,6 +89,10 @@ namespace Estoque.API.Controllers
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateProductDTO dto)
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return BadRequest(new { message = "❌ Acesso inválido para cliente, somente para Administradores" });
+            }
 
             var existing = await _repo.GetByIdAsync(id);
             if (existing == null)
@@ -134,6 +143,10 @@ namespace Estoque.API.Controllers
         [HttpPut("{id:int}/quantity")]
         public async Task<IActionResult> UpdateQuantity(int id, [FromBody] UpdateQuantityDTO dto)
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return BadRequest(new { message = "❌ Acesso inválido para cliente, somente para Administradores" });
+            }
             var existing = await _repo.GetByIdAsync(id);
             if (existing == null)
                 return NotFound("❌ Produto não encontrado.");
@@ -149,13 +162,37 @@ namespace Estoque.API.Controllers
             return Ok("✅ Quantidade atualizada com sucesso!");
         }
 
+        // Endpoint específico para vendas (clientes podem atualizar quantidade ao comprar)
+        [HttpPatch("{id:int}/quantity/sell")]
+        public async Task<IActionResult> UpdateQuantityForSale(int id, [FromBody] UpdateQuantityDTO dto)
+        {
+            var existing = await _repo.GetByIdAsync(id);
+            if (existing == null)
+                return NotFound("❌ Produto não encontrado.");
+
+            // Validação da quantidade
+            if (dto.Quantity > existing.Quantity)
+                return BadRequest($"❌ Quantidade insuficiente em estoque. Disponível: {existing.Quantity}");
+
+            // Atualiza a quantidade (subtraindo do estoque)
+            existing.Quantity = existing.Quantity - dto.Quantity; // Aqui a quantidade é subtraída, não substituída
+
+            await _repo.UpdateAsync(existing);
+            return Ok("✅ Quantidade atualizada com sucesso!");
+        }
+
         [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
+            if (!User.IsInRole("Admin"))
+            {
+                return BadRequest(new { message = "❌ Acesso inválido para cliente, somente para Administradores" });
+            }
             var existing = await _repo.GetByIdAsync(id);
-            if (existing == null) return NotFound();
+            if (existing == null) return NotFound("❌ Produto não encontrado.");
+            
             await _repo.DeleteAsync(id);
-            return NoContent();
+            return Ok(new { message = "✅ Produto excluído do estoque com sucesso!" });
         }
     }
 }

@@ -85,7 +85,16 @@ builder.Services.AddSwaggerGen(options =>
     options.AddSecurityRequirement(securityRequirement);
 });
 
-builder.Services.AddAuthorization();
+builder.Services.AddAuthorization(options =>
+{
+    // Admin tem acesso total
+    options.AddPolicy("RequireAdmin", policy => 
+        policy.RequireRole("Admin"));
+    
+    // Customer e Admin podem acessar endpoints básicos
+    options.AddPolicy("RequireCustomer", policy => 
+        policy.RequireRole("Customer", "Admin")); // Note que Admin também pode acessar rotas de Customer
+});
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
